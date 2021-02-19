@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+@import 'assets/app-assets/vendors/css/vendors.min.css';
+@import 'assets/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css';
+@import 'assets/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css';
+@import 'assets/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css';
+@import 'assets/app-assets/css/bootstrap.min.css';
+@import 'assets/app-assets/css/bootstrap-extended.min.css';
+@import 'assets/app-assets/css/colors.min.css';
+@import 'assets/app-assets/css/components.min.css';
+@import 'assets/app-assets/css/themes/dark-layout.min.css';
+@import 'assets/app-assets/css/themes/semi-dark-layout.min.css';
+@import 'assets/app-assets/css/core/menu/menu-types/vertical-menu.min.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

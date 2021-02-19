@@ -1,0 +1,101 @@
+<section id="basic-horizontal-layouts">
+  <div class="row match-height">
+    <div class="col-md-6 col-12">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Product</mat-card-title>
+          <mat-card-subtitle *ngIf="!isViewOnly">Create New Product</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="isViewOnly">Product Details</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <swal #approvedSwal
+                text="{{ approvedSwal?.text }}"
+                title="{{ approvedSwal?.title }}"
+                icon="{{ approvedSwal?.icon }}">
+
+          </swal>
+            <form [formGroup]="productForm" class="form form-vertical">
+              <div class="form-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Product Code</mat-label>
+                        <input matInput formControlName="product_code">
+                      </mat-form-field>
+                      <mat-error
+                        *ngIf="formControl.product_code.invalid && (formControl.product_code.dirty || formControl.product_code.touched)"
+                        align="end">
+                        <b *ngIf="formControl.product_code.errors.required">Product Code is required</b>
+                      </mat-error>
+
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="form-group">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <input matInput formControlName="description">
+                      </mat-form-field>
+                      <mat-error
+                        *ngIf="formControl.description.invalid && (formControl.description.dirty || formControl.description.touched)"
+                        align="end">
+                        <b *ngIf="formControl.description.errors.required">Description is required</b>
+                      </mat-error>
+
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="form-group">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Category Types</mat-label>
+                        <mat-select formControlName="categories" >
+                          <mat-option>Select Measurement Type</mat-option>
+                          <mat-option *ngFor="let type of categories"
+                                      [value]="type">{{ type.description }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-error
+                        *ngIf="formControl.categories.invalid && (formControl.categories.dirty || formControl.categories.touched)"
+                        align="end">
+                        <b *ngIf="formControl.categories.errors.required">Categories Type is required</b>
+                      </mat-error>
+                    </div>
+                  </div>
+
+                  <div class="col-12 d-flex justify-content-end">
+                    <div class="text-right">
+                      <button mat-raised-button class="btn btn-primary" (click)="submitProduct()"
+                              [disabled]="!validateApplicationForm()" *ngIf="action === 'CREATE' || action === 'EDIT'">
+                        <mat-icon> check</mat-icon>
+                        <span> Create </span>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+        </mat-card-content>
+        </mat-card>
+    </div>
+
+
+    <div class="col-md-6 col-12">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Product Items</mat-card-title>
+          <mat-card-subtitle *ngIf="!isViewOnly">Create New Product Item</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="isViewOnly">Product Items</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <app-product-item *ngIf="isLoaded" [items]="product.product_items" (itemEvents)="onProductItemChange($event)" [isViewOnly]="isViewOnly"></app-product-item>
+        </mat-card-content>
+        </mat-card>
+    </div>
+  </div>
+</section>
+
+

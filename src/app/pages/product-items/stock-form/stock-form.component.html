@@ -1,0 +1,150 @@
+<swal #approvedSwal
+      text="{{ approvedSwal?.text }}"
+      title="{{ approvedSwal?.title }}"
+      icon="{{ approvedSwal?.icon }}">
+
+</swal>
+<h1 mat-dialog-title>Stock Item</h1>
+<div mat-dialog-content>
+  <form [formGroup]="stockForm" class="form form-vertical">
+    <div class="form-body">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Inventory Type</mat-label>
+              <mat-select formControlName="inventoryType"  (selectionChange)="inventorySelected()" >
+                <mat-option>Select Inventory Type</mat-option>
+                <mat-option *ngFor="let type of inventoryType"
+                            [value]="type">{{ type.key }}</mat-option>
+
+              </mat-select>
+            </mat-form-field>
+            <mat-error
+              *ngIf="formControl.inventoryType.invalid && (formControl.inventoryType.dirty || formControl.inventoryType.touched)"
+              align="end">
+              <b *ngIf="formControl.inventoryType.errors.required">Inventory Type is required</b>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>StockIn Type</mat-label>
+              <mat-select formControlName="stockInType" >
+                <mat-option>Select StockIn Type</mat-option>
+                <mat-option *ngFor="let type of stockInType"
+                            [value]="type">{{ type.key }}</mat-option>
+
+              </mat-select>
+            </mat-form-field>
+            <mat-error
+              *ngIf="formControl.stockInType.invalid && (formControl.stockInType.dirty || formControl.stockInType.touched)"
+              align="end">
+              <b *ngIf="formControl.stockInType.errors.required">StockIn Type is required</b>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Adjust Type</mat-label>
+              <mat-select formControlName="adjustType"  (selectionChange)="adjustTypeSelected()"  >
+                <mat-option>Select Adjust Type</mat-option>
+                <mat-option *ngFor="let type of adjustTypes"
+                            [value]="type">{{ type.key }}</mat-option>
+
+              </mat-select>
+            </mat-form-field>
+            <mat-error
+              *ngIf="formControl.adjustType.invalid && (formControl.adjustType.dirty || formControl.adjustType.touched)"
+              align="end">
+              <b *ngIf="formControl.adjustType.errors.required">Adjust Type is required</b>
+            </mat-error>
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Remarks</mat-label>
+              <input matInput formControlName="remarks">
+            </mat-form-field>
+            <mat-error
+              *ngIf="formControl.remarks.invalid && (formControl.remarks.dirty || formControl.remarks.touched)"
+              align="end">
+              <b *ngIf="formControl.remarks.errors.required">Remarks is required</b>
+            </mat-error>
+
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Supplier</mat-label>
+              <input matInput formControlName="supplier">
+            </mat-form-field>
+            <mat-error
+              *ngIf="formControl.supplier.invalid && (formControl.supplier.dirty || formControl.supplier.touched)"
+              align="end">
+              <b *ngIf="formControl.supplier.errors.required">Supplier is required</b>
+            </mat-error>
+
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Supplier Tin</mat-label>
+              <input matInput formControlName="supplierTin">
+            </mat-form-field>
+            <mat-error
+              *ngIf="formControl.supplierTin.invalid && (formControl.supplierTin.dirty || formControl.supplierTin.touched)"
+              align="end">
+              <b *ngIf="formControl.supplierTin.errors.required">SupplierTin is required</b>
+            </mat-error>
+
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Count Value</mat-label>
+              <input matInput formControlName="count_value">
+            </mat-form-field>
+            <mat-error
+              *ngIf="formControl.count_value.invalid && (formControl.count_value.dirty || formControl.count_value.touched)"
+              align="end">
+              <b *ngIf="formControl.count_value.errors.required">Count Value is required</b>
+            </mat-error>
+
+          </div>
+        </div>
+
+
+
+        <div class="col-12 d-flex justify-content-end">
+          <div class="text-right">
+            <button mat-raised-button class="btn btn-primary" (click)="onNoClick()"
+                    [disabled]="!validateApplicationForm()" *ngIf="action === 'CREATE' || action === 'EDIT'">
+              <mat-icon> check</mat-icon>
+              <span> Create </span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="onSubmit()">Ok</button>
+</div>

@@ -1,0 +1,65 @@
+<section id="column-selectors">
+  <div class="invoice-create-btn mb-1">
+    <a [routerLink]="['/measurements/create']" routerLinkActive="router-link-active" class="btn btn-primary glow invoice-create" role="button" aria-pressed="true">
+      Add New</a>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">
+            Units of Measurements
+          </h4>
+        </div>
+        <div class="card-body card-dashboard">
+          <div class="table-responsive">
+            <table class="table table-striped dataex-html5-selectors">
+              <thead>
+              <tr>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Units</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of list">
+                <td>{{ item.data_item.unit_code }}</td>
+                <td>{{ item.data_item.description }}</td>
+                <td>{{ item.data_item.units }}</td>
+                <td></td>
+                <td>
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <a [routerLink]="['/measurements/',item.data_item.id ]" routerLinkActive="router-link-active"  class="link"  mat-menu-item>
+                      <mat-icon  matTooltip="View Case File" >remove_red_eye</mat-icon>
+                      View
+                    </a>
+                    <a [routerLink]="['/measurements/update',item.data_item.id ]" routerLinkActive="router-link-active"  class="link"  mat-menu-item>
+                      <mat-icon  matTooltip="Edit" >edit</mat-icon>
+                      Edit
+                    </a>
+
+                  </mat-menu>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Units</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

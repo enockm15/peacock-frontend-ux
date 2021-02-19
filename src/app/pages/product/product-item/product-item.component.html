@@ -1,0 +1,109 @@
+
+<ng-container *ngIf="!isViewOnly">
+<swal #approvedSwal text="{{ approvedSwal?.text }}" title="{{ approvedSwal?.title }}"
+        icon="{{ approvedSwal?.icon }}">
+  </swal>
+  <form [formGroup]="productItemForm">
+    <div class="col-12">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Unit of Measure</mat-label>
+          <mat-select formControlName="unit_measurement">
+            <mat-option *ngFor="let unit of unitOfMeasurements"
+                        [value]="unit.data_item"> {{ unit.data_item.units }} - {{ unit.data_item.unit_code }} </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error
+          *ngIf="formControl.unit_measurement.invalid && (formControl.unit_measurement.dirty || formControl.unit_measurement.touched)"
+          align="end">
+          <b *ngIf="formControl.unit_measurement.errors.required">Unit Of Measurement is required</b>
+        </mat-error>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Units Price</mat-label>
+          <input matInput formControlName="unit_price">
+        </mat-form-field>
+        <mat-error
+          *ngIf="formControl.unit_price.invalid && (formControl.unit_price.dirty || formControl.unit_price.touched)"
+          align="end">
+          <b *ngIf="formControl.unit_price.errors.required">Unit Price is required</b>
+        </mat-error>
+
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Quantity</mat-label>
+          <input matInput formControlName="quantity">
+        </mat-form-field>
+        <mat-error
+          *ngIf="formControl.quantity.invalid && (formControl.quantity.dirty || formControl.quantity.touched)"
+          align="end">
+          <b *ngIf="formControl.quantity.errors.required">Quantity is required</b>
+        </mat-error>
+
+      </div>
+    </div>
+
+
+    <div class="col-12 d-flex justify-content-end">
+      <div class="text-right">
+        <button mat-raised-button class="btn btn-primary" (click)="addOrUpdateProductItem(isEditing?2:1)"
+                color="text-with-primary">
+          <mat-icon>{{buttonIcon}}</mat-icon>
+          <span>{{buttonLabel}}</span>
+        </button>
+      </div>
+    </div>
+
+  </form>
+</ng-container>
+
+  <div class="table-responsive" >
+    <!--------------------
+START - Basic Table
+-------------------->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Unit Of Measurement</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of list; index as i">
+        <td>
+                <span>
+                   {{ item.unit_measurement.units }} - {{ item.unit_measurement.unit_code }}
+                </span>
+        </td>
+        <td >
+          <span>   {{ item.unit_price }}</span>
+        </td>
+
+        <td >
+          <span>   {{ item.quantity }}</span>
+        </td>
+
+        <td >
+          <a *ngIf="!isViewOnly" class="link" (click)="manageProductItem(2, i)" >
+            <mat-icon color="primary">edit</mat-icon>
+          </a>&nbsp;&nbsp;
+          <a *ngIf="!isViewOnly" class="link" (click)="deleteProductItem(i)">
+            <mat-icon color="warn">delete</mat-icon>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+

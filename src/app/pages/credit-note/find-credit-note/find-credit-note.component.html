@@ -1,0 +1,88 @@
+<section id="column-selectors">
+  <div class="invoice-create-btn mb-1">
+    <swal #approvedSwal
+          text="{{ approvedSwal?.text }}"
+          title="{{ approvedSwal?.title }}"
+          icon="{{ approvedSwal?.icon }}">
+
+    </swal>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <mat-card-header></mat-card-header>
+
+      <mat-card>
+        <!--        <mat-form-field>-->
+        <!--          <mat-label>Filter</mat-label>-->
+        <!--          <input matInput (keyup)="applyFilter($event)" placeholder="Filter">-->
+        <!--        </mat-form-field>-->
+
+        <table mat-table [dataSource]="dataSource" class="table table-striped dataex-html5-selectors" >
+          <ng-container matColumnDef="fdn">
+            <th mat-header-cell *matHeaderCellDef >FDN</th>
+            <td mat-cell *matCellDef="let row">{{row.data_item.oriInvoiceNo}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="invoice_id">
+            <th mat-header-cell *matHeaderCellDef >Invoice Id</th>
+            <td mat-cell *matCellDef="let row">{{row.data_item.oriInvoiceId}}</td>
+          </ng-container>
+          <ng-container matColumnDef="reference_no">
+            <th mat-header-cell *matHeaderCellDef >Reference Number</th>
+            <td mat-cell *matCellDef="let row">{{ row.data_item.referenceNo }}</td>
+          </ng-container>
+          <ng-container matColumnDef="reason_code">
+            <th mat-header-cell *matHeaderCellDef >Reason Code</th>
+            <td mat-cell *matCellDef="let row">{{row.data_item.reasonCode}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="response_code">
+            <th mat-header-cell *matHeaderCellDef >Response Code</th>
+            <td mat-cell *matCellDef="let row">{{row.data_item.response_code}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="response_message">
+            <th mat-header-cell *matHeaderCellDef >Response Message</th>
+            <td mat-cell *matCellDef="let row">{{row.data_item.response_message}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef >Status</th>
+            <td mat-cell *matCellDef="let row"></td>
+          </ng-container>
+
+          <ng-container matColumnDef="issueDate">
+            <th mat-header-cell *matHeaderCellDef >Issue Date</th>
+            <td mat-cell *matCellDef="let row"></td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions*">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let row" class="actions">
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Context menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <a [routerLink]="['/credit-notes/view/',row.data_item.id]" routerLinkActive="router-link-active">
+                  <button mat-menu-item>
+                    <mat-icon color="primary" matTooltip="View Credit Note">visibility</mat-icon>
+                    <span>View</span>
+                  </button>
+                </a>
+                <a [routerLink]="['/credit-notes/update',row.data_item.id]" routerLinkActive="router-link-active">
+                  <button mat-menu-item>
+                    <mat-icon color="primary" matTooltip="Cancel Credit Note">cancel</mat-icon>
+                    <span>Cancel</span>
+                  </button>
+                </a>
+              </mat-menu>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[20,50,100]" showFirstLastButtons></mat-paginator>
+      </mat-card>
+    </div>
+  </div>
+</section>

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  applicationServerURL:  'http://efris.local:8080/stock/api'
+  applicationServerURL:  'http://localhost:8080/stock/api'
 };
